@@ -1,13 +1,11 @@
-// components/Navbar.js
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { useCart } from '../contexts/CartContext';
 
 const NavbarComponent = () => {
-  const { cart } = useCart();  // Accessing the cart state from context
-
-  // Calculate the total number of items in the cart (including quantity of each item)
+  const { cart } = useCart(); 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (

@@ -1,4 +1,4 @@
-// components/ProductDetail.js
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, Container, Row, Col } from 'react-bootstrap';
