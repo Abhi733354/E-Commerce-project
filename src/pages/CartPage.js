@@ -6,7 +6,6 @@ import { Button, Table, Container, Card } from 'react-bootstrap';
 const Cart = () => {
   const { cart, removeFromCart } = useCart();
 
-  // Calculate the total amount of all items in the cart
   const totalAmount = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
@@ -38,7 +37,7 @@ const Cart = () => {
                   <td>
                     <Button
                       variant="danger"
-                      onClick={() => removeFromCart(item.id)} // Removes one item by id
+                      onClick={() => removeFromCart(item.id)} 
                     >
                       Remove
                     </Button>
@@ -48,7 +47,6 @@ const Cart = () => {
             </tbody>
           </Table>
 
-          {/* Display the Total Amount in a Card */}
           <Card className="mt-4">
             <Card.Body>
               <Card.Title>Total Amount</Card.Title>
