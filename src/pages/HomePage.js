@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Row, Col, Form, Container } from 'react-bootstrap';
 import ProductCard from '../components/ProductCard';
 import axios from 'axios';
@@ -18,11 +18,7 @@ const HomePage = () => {
       .catch(error => console.error(error));
   }, []);
 
-  useEffect(() => {
-    applyFiltersAndSort();
-  }, [category, sortOption]);
-
-  const applyFiltersAndSort = () => {
+  const applyFiltersAndSort = useCallback(() => {
     let updatedProducts = [...products];
     
     if (category !== 'all') {
@@ -36,11 +32,17 @@ const HomePage = () => {
     }
 
     setFilteredProducts(updatedProducts);
-  };
+  }, [category, sortOption, products]);
+
+  useEffect(() => {
+    applyFiltersAndSort();
+  }, [category, sortOption, applyFiltersAndSort]);
 
   return (
     <Container className="my-4">
       <h2 className="text-center mb-4">Products</h2>
+
+      {/* Filter and Sort Controls */}
       <Row className="mb-4 align-items-center">
         <Col md={4} sm={6} xs={12} className="mb-2">
           <Form.Label>Category</Form.Label>
@@ -62,6 +64,8 @@ const HomePage = () => {
           </Form.Select>
         </Col>
       </Row>
+
+      {/* Product Grid */}
       <Row>
         {filteredProducts.map(product => (
           <Col md={4} sm={6} xs={12} className="mb-4" key={product.id}>
